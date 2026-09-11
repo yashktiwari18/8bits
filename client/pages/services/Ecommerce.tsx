@@ -1,0 +1,176 @@
+import React, { useState } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import ContactModal from "@/components/ContactModal";
+import { ShoppingCart, CreditCard, Package, BarChart3, ArrowRight, CheckCircle } from "lucide-react";
+
+const features = [
+  {
+    icon: ShoppingCart,
+    title: "Custom E-commerce",
+    description: "Tailored online stores built for your specific business needs"
+  },
+  {
+    icon: CreditCard,
+    title: "Payment Integration",
+    description: "Secure payment gateways with multiple payment options"
+  },
+  {
+    icon: Package,
+    title: "Inventory Management",
+    description: "Advanced inventory tracking and management systems"
+  },
+  {
+    icon: BarChart3,
+    title: "Analytics & Reports",
+    description: "Detailed sales analytics and business intelligence"
+  }
+];
+
+const services = [
+  "Custom E-commerce Development",
+  "Shopify Store Setup",
+  "WooCommerce Development",
+  "Payment Gateway Integration",
+  "Inventory Management System",
+  "Multi-vendor Marketplace",
+  "Mobile Commerce Apps",
+  "E-commerce SEO Optimization"
+];
+
+const technologies = [
+  "Shopify", "WooCommerce", "Magento", "React", "Node.js", "Stripe",
+  "PayPal", "Razorpay", "MongoDB", "PostgreSQL", "AWS", "Firebase"
+];
+
+export default function Ecommerce() {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const handleContactClick = () => {
+    setIsContactModalOpen(true);
+  };
+
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+      <Header />
+
+      {/* Hero Section */}
+      <section className="py-20 md:py-32 bg-gradient-to-b from-pink-50 to-white dark:from-slate-950 dark:to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <div className="inline-flex p-4 rounded-2xl bg-pink-100 dark:bg-pink-900/30 mb-6">
+              <ShoppingCart size={48} className="text-pink-600" />
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
+              E-commerce Solutions
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
+              Build powerful online stores that convert visitors into customers. Custom e-commerce platforms 
+              with payment integration, inventory management, and analytics.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 md:py-32">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Complete E-commerce Solutions
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Everything you need to launch and grow your online business
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={index}
+                  className="bg-white dark:bg-slate-900 rounded-2xl p-8 border border-border hover:border-pink-500/50 transition-all hover:shadow-lg"
+                >
+                  <Icon className="w-12 h-12 text-pink-600 mb-4" />
+                  <h3 className="text-xl font-bold text-foreground mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {feature.description}
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* Services List */}
+      <section className="py-20 md:py-32 bg-slate-50 dark:bg-slate-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+                E-commerce Services
+              </h2>
+              <div className="grid grid-cols-1 gap-4">
+                {services.map((service, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-pink-600 flex-shrink-0" />
+                    <span className="text-foreground font-medium">{service}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-foreground mb-6">
+                E-commerce Technologies
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {technologies.map((tech, index) => (
+                  <div
+                    key={index}
+                    className="bg-white dark:bg-slate-800 rounded-lg p-4 border border-border text-center font-semibold text-foreground hover:border-pink-500/50 transition-all"
+                  >
+                    {tech}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 md:py-32 bg-gradient-to-r from-pink-600 to-rose-600">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Launch Your Online Store
+          </h2>
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
+            Ready to start selling online? Let's build an e-commerce solution that drives sales and grows your business.
+          </p>
+          <button 
+            onClick={handleContactClick}
+            className="px-8 py-4 bg-white text-pink-600 rounded-lg font-semibold hover:bg-slate-50 transition-all transform hover:scale-105 shadow-lg inline-flex items-center gap-2"
+          >
+            Start Your Store
+            <ArrowRight size={20} />
+          </button>
+        </div>
+      </section>
+
+      <Footer />
+      
+      <ContactModal 
+        isOpen={isContactModalOpen} 
+        onClose={() => setIsContactModalOpen(false)} 
+      />
+    </div>
+  );
+}

@@ -1,0 +1,52 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Skip deploy commits to prevent infinite loop
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Build project
+        run: pnpm run build:github-pages
+
+      - name: Copy built files to repo root
+        run: |
+          cp docs/index.html index.html
+          cp docs/index.html 404.html
+          rm -rf assets
+          cp -r docs/assets ./assets
+          echo "www.8bitsdev.click" > CNAME
+          touch .nojekyll
+
+      - name: Commit and push built files to master
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add index.html 404.html assets/ CNAME .nojekyll
+          git diff --cached --quiet || git commit -m "deploy: update built site at master root [skip ci]"
+          git push origin master
