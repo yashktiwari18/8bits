@@ -31,7 +31,7 @@ const pricingPlans = [
     id: "android",
     name: "Android App",
     price: "₹11,999",
-    originalPrice: "₹11,999",
+    originalPrice: "₹19,999",
     description: "Native Android app with backend integration",
     features: [
       "8 App Screens",
@@ -53,7 +53,7 @@ const pricingPlans = [
     id: "ios",
     name: "iOS App",
     price: "₹15,499",
-    originalPrice: "₹12,999",
+    originalPrice: "₹25,999",
     description: "Native iOS app with backend integration",
     features: [
       "8 App Screens",
@@ -74,7 +74,7 @@ const pricingPlans = [
     id: "complete",
     name: "Complete Package",
     price: "₹20,999",
-    originalPrice: "₹24,999",
+    originalPrice: "₹35,999",
     description: "Everything you need for digital presence",
     features: [
       "Android + iOS Apps",
@@ -108,7 +108,7 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="py-16 md:py-24 pt-20 bg-gradient-to-b from-white to-slate-50 dark:from-slate-950 dark:to-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -119,16 +119,16 @@ export default function Pricing() {
               </span>
             </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6">
             Simple, Affordable
             <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent block pb-4 leading-normal">
               Pricing Plans
             </span>
           </h1>
-          
+
           <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Choose the perfect plan for your business needs. No hidden fees, no surprises. 
+            Choose the perfect plan for your business needs. No hidden fees, no surprises.
             Just quality development at transparent prices.
           </p>
 
@@ -158,11 +158,10 @@ export default function Pricing() {
               return (
                 <div
                   key={plan.id}
-                  className={`relative bg-gradient-to-b from-white/90 to-white/60 dark:bg-slate-900 rounded-3xl p-8 border hover:-translate-y-4 transform-gpu transition-all duration-500 backdrop-blur-xl ${
-                    plan.popular 
-                      ? 'border-white shadow-[0_30px_60px_-15px_rgba(59,130,246,0.6),_inset_0_2px_15px_rgba(255,255,255,1)] ring-2 ring-primary scale-105 z-10' 
-                      : 'border-white/80 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.8)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]'
-                  }`}
+                  className={`relative bg-gradient-to-b from-white/90 to-white/60 dark:bg-slate-900 rounded-3xl p-8 border hover:-translate-y-4 transform-gpu transition-all duration-500 backdrop-blur-xl ${plan.popular
+                    ? 'border-white shadow-[0_30px_60px_-15px_rgba(59,130,246,0.6),_inset_0_2px_15px_rgba(255,255,255,1)] ring-2 ring-primary scale-105 z-10'
+                    : 'border-white/80 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1),_inset_0_2px_10px_rgba(255,255,255,0.8)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)]'
+                    }`}
                 >
                   {plan.popular && (
                     <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -172,7 +171,7 @@ export default function Pricing() {
                       </span>
                     </div>
                   )}
-                  
+
                   <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${plan.color} text-white mb-6`}>
                     <Icon size={24} />
                   </div>
@@ -206,11 +205,10 @@ export default function Pricing() {
 
                   <button
                     onClick={handleContactClick}
-                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 ${
-                      plan.popular
-                        ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
-                        : 'border-2 border-primary text-primary hover:bg-primary/5'
-                    }`}
+                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center justify-center gap-2 ${plan.popular
+                      ? 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg'
+                      : 'border-2 border-primary text-primary hover:bg-primary/5'
+                      }`}
                   >
                     Get Started
                     <ArrowRight size={16} />
@@ -269,7 +267,7 @@ export default function Pricing() {
             Ready to Start Your Project?
           </h2>
           <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
-            Get in touch with us today and let's discuss how we can bring your ideas to life 
+            Get in touch with us today and let's discuss how we can bring your ideas to life
             with our affordable and professional development services.
           </p>
           <button
@@ -283,10 +281,10 @@ export default function Pricing() {
       </section>
 
       <Footer />
-      
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+
+      <ContactModal
+        isOpen={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );

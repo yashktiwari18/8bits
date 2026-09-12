@@ -4,9 +4,10 @@ import { X } from "lucide-react";
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  source?: 'pricing' | 'pre-build';
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, source }: ContactModalProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -121,11 +122,22 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent bg-background text-foreground"
                 >
                   <option value="">Select a service</option>
-                  <option value="website">Static Website (₹7,499)</option>
-                  <option value="android">Android App (₹11,999)</option>
-                  <option value="ios">iOS App (₹15,499)</option>
-                  <option value="complete">Complete Package (₹20,999)</option>
-                  <option value="custom">Custom Solution</option>
+                  {source === 'pre-build' ? (
+                    <>
+                      <option value="food-delivery">Food Delivery App (₹30,999)</option>
+                      <option value="ecommerce">E-commerce Platform (₹28,999)</option>
+                      <option value="management">Management System (₹15,999)</option>
+                      <option value="custom-prebuild">Custom Pre-Build Solution</option>
+                    </>
+                  ) : (
+                    <>
+                      <option value="website">Static Website (₹7,499)</option>
+                      <option value="android">Android App (₹11,999)</option>
+                      <option value="ios">iOS App (₹15,499)</option>
+                      <option value="complete">Complete Package (₹20,999)</option>
+                      <option value="custom">Custom Solution</option>
+                    </>
+                  )}
                 </select>
               </div>
 

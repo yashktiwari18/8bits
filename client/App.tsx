@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import Pricing from "./pages/Pricing";
+import PreBuild from "./pages/PreBuild";
 import NotFound from "./pages/NotFound";
 import WebDevelopment from "./pages/services/WebDevelopment";
 import AppDevelopment from "./pages/services/AppDevelopment";
@@ -64,6 +65,7 @@ export default function App() {
             <Route path="/" element={<Index />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/pricing" element={<Pricing />} />
+            <Route path="/pre-build" element={<PreBuild />} />
             <Route
               path="/services/web-development"
               element={<WebDevelopment />}

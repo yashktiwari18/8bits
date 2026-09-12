@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useTransform, useMotionValueEvent, useMotionValue, animate } from 'framer-motion';
-import { MessageCircle, LayoutGrid, Tag, Mail } from 'lucide-react';
+import { MessageCircle, LayoutGrid, Tag, Mail, Rocket } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const FRAME_COUNT = 240;
@@ -14,6 +14,7 @@ interface HeroFrameProps {
 const bubbleServices = [
   { id: 1, title: 'WhatsApp', icon: MessageCircle, url: 'https://wa.me/918521080076' },
   { id: 2, title: 'Services', icon: LayoutGrid, hash: '#services' },
+  { id: 5, title: 'Pre-Build', icon: Rocket, path: '/pre-build' },
   { id: 3, title: 'Pricing', icon: Tag, path: '/pricing' },
   { id: 4, title: 'Contact', icon: Mail, contactModal: true },
 ];
@@ -50,12 +51,12 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
   const drawFrame = (index: number) => {
     const canvas = canvasRef.current;
     if (!canvas || images.length === 0) return;
-    
+
     // Set internal resolution matching standard 16:9
     canvas.width = 1920;
     canvas.height = 1080;
     const ctx = canvas.getContext('2d');
-    
+
     // Safely get index
     const arrayIndex = Math.min(Math.max(0, Math.floor(index) - 1), FRAME_COUNT - 1);
     const img = images[arrayIndex];
@@ -78,7 +79,7 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
   }, [images]);
 
   // Story Sequence Transforms
-  
+
   // Intro Text fades out quickly
   const introOpacity = useTransform(progress, [0, 0.1, 0.2], [1, 1, 0]);
   const introScale = useTransform(progress, [0, 0.2], [1, 0.9]);
@@ -89,10 +90,10 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
 
   return (
     <section ref={containerRef} className="h-screen w-full relative bg-[#E8F1FF]">
-      
+
       {/* Fullscreen Experience */}
       <div className="relative h-full w-full overflow-hidden flex flex-col items-center justify-center">
-        
+
         {/* Simple absolute logo to replace header */}
         <div className="absolute top-8 left-8 z-50 flex items-center gap-3">
           <img src="/8bit.png" alt="8bitdev" className="w-10 h-10 rounded-xl shadow-sm" />
@@ -108,13 +109,13 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
         </button>
 
         {/* Canvas Background */}
-        <canvas 
-          ref={canvasRef} 
-          className="absolute inset-0 w-full h-full object-cover z-0" 
+        <canvas
+          ref={canvasRef}
+          className="absolute inset-0 w-full h-full object-cover z-0"
         />
-        
+
         {/* Intro */}
-        <motion.div 
+        <motion.div
           style={{ opacity: introOpacity, scale: introScale }}
           className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center z-10 w-full mt-[-10vh] pointer-events-none"
         >
@@ -127,8 +128,8 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
         </motion.div>
 
         {/* --- PREMIUM FLOATING SATELLITE PILLS --- */}
-        <motion.div 
-          style={{ opacity: bubbleOpacity, scale: bubbleScale }} 
+        <motion.div
+          style={{ opacity: bubbleOpacity, scale: bubbleScale }}
           className="absolute inset-0 pointer-events-none hidden md:block z-20"
         >
           {bubbleServices.map((service, index) => {
@@ -136,16 +137,17 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
             const positions = [
               "bottom-[22%] left-[12%] 2xl:bottom-[25%] 2xl:left-[18%]", // Home
               "bottom-[8%] left-[22%] 2xl:bottom-[10%] 2xl:left-[28%]", // Services
+              "bottom-[4%] left-[40%] -translate-x-1/2 2xl:bottom-[6%] 2xl:left-[44%]", // Pre-Build
               "bottom-[22%] right-[12%] 2xl:bottom-[25%] 2xl:right-[18%]", // Pricing
               "bottom-[8%] right-[22%] 2xl:bottom-[10%] 2xl:right-[28%]"  // Contact
             ];
-            
+
             return (
               <motion.div
                 key={service.id}
                 initial={{ y: 0, opacity: 0, scale: 0.8 }}
                 animate={{ y: [0, -12, 0], opacity: 1, scale: 1 }}
-                transition={{ 
+                transition={{
                   y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.4 },
                   opacity: { duration: 0.6, delay: 0.5 + index * 0.1 },
                   scale: { duration: 0.6, delay: 0.5 + index * 0.1 }
@@ -164,25 +166,25 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
                     if (service.hash === '#home') {
                       window.scrollTo({ top: 0, behavior: 'smooth' });
                     } else {
-                        const el = document.querySelector(service.hash);
-                        if (el) el.scrollIntoView({ behavior: 'smooth' });
-                        else navigate('/' + service.hash);
+                      const el = document.querySelector(service.hash);
+                      if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      else navigate('/' + service.hash);
                     }
                   }
                 }}
               >
-                  {/* Distinctive icon badge */}
-                  <div className="relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_20px_-5px_rgba(0,0,0,0.15)] group-hover:shadow-[0_10px_25px_-5px_rgba(59,130,246,0.5)] transform-gpu group-hover:-translate-y-1 transition-all duration-300">
-                    <service.icon strokeWidth={2.5} className="w-5 h-5 md:w-6 md:h-6 text-slate-700 group-hover:text-blue-600 transition-colors duration-300" />
-                  </div>
-                  <span className="text-sm md:text-base font-black text-slate-800 tracking-tight whitespace-nowrap group-hover:text-blue-900">
-                    {service.title}
-                  </span>
+                {/* Distinctive icon badge */}
+                <div className={`relative flex items-center justify-center w-12 h-12 md:w-14 md:h-14 bg-white rounded-full shadow-[0_10px_20px_-5px_rgba(0,0,0,0.15)] transform-gpu group-hover:-translate-y-1 transition-all duration-300 ${service.title === 'Pre-Build' ? 'group-hover:shadow-[0_10px_25px_-5px_rgba(236,72,153,0.5)]' : 'group-hover:shadow-[0_10px_25px_-5px_rgba(59,130,246,0.5)]'}`}>
+                  <service.icon strokeWidth={2.5} className={`w-5 h-5 md:w-6 md:h-6 text-slate-700 transition-colors duration-300 ${service.title === 'Pre-Build' ? 'group-hover:text-pink-600' : 'group-hover:text-blue-600'}`} />
+                </div>
+                <span className={`text-sm md:text-base font-black text-slate-800 tracking-tight whitespace-nowrap ${service.title === 'Pre-Build' ? 'group-hover:text-pink-900' : 'group-hover:text-blue-900'}`}>
+                  {service.title}
+                </span>
               </motion.div>
             );
           })}
         </motion.div>
-        
+
       </div>
     </section>
   );
