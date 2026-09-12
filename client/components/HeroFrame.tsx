@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useTransform, useMotionValueEvent, useMotionValue, animate } from 'framer-motion';
 import { MessageCircle, LayoutGrid, Tag, Mail, Rocket } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
 const FRAME_COUNT = 240;
 const currentFrame = (index: number) =>
@@ -94,19 +95,8 @@ export default function HeroFrame({ onContactClick }: HeroFrameProps) {
       {/* Fullscreen Experience */}
       <div className="relative h-full w-full overflow-hidden flex flex-col items-center justify-center">
 
-        {/* Simple absolute logo to replace header */}
-        <div className="absolute top-8 left-8 z-50 flex items-center gap-3">
-          <img src="/8bit.png" alt="8bitdev" className="w-10 h-10 rounded-xl shadow-sm" />
-          <span className="font-black text-2xl tracking-tighter text-gray-900 drop-shadow-md">8bitdev</span>
-        </div>
-
-        {/* CTA Button top right */}
-        <button
-          onClick={onContactClick}
-          className="absolute top-8 right-8 z-50 px-6 py-3 bg-yellow-400 text-gray-900 rounded-full font-bold hover:scale-105 hover:bg-yellow-300 transition-all shadow-md border-2 border-yellow-200"
-        >
-          Get Started
-        </button>
+        {/* Global Floating Header */}
+        <Header onContactClick={onContactClick} />
 
         {/* Canvas Background */}
         <canvas
